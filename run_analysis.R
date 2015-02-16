@@ -65,7 +65,7 @@ dData <- cbind(dataSubActivity, limited)
 cleanData <- dData[,activityID:=NULL]
 
 # Step 4 - Return the cleaned data for analysis
-cleanData
+# cleanData
 
 # Step 5  
 # From the data set in step 4, creates a second, independent tidy data set 
@@ -77,10 +77,10 @@ cleanData
 #cleanData[, .N, by=.(subject,activity)]
 
 # The following step gives the aggregated data by subject/activity.
-#tidyData <- cleanData[, lapply(.SD[3:.N], mean), by=.(subject,activity)]
+tidyData <- cleanData[, lapply(.SD[3:.N], mean), by=.(subject,activity)]
 
 # Output the tidyData
-# tidyData
+tidyData
 
 # Order the data by subjects, so it is ready for analysis on subjects
 # orderedTidyData <- tidyData[order(tidyData$subject),]
