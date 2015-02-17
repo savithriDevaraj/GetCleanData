@@ -77,15 +77,15 @@ cleanData <- dData[,activityID:=NULL]
 #cleanData[, .N, by=.(subject,activity)]
 
 # The following step gives the aggregated data by subject/activity.
-tidyData <- cleanData[, lapply(.SD[3:.N], mean), by=.(subject,activity)]
-
-# Output the tidyData
-tidyData
+tidyData <- cleanData[, lapply(.SD, mean), by=.(subject,activity)]
 
 # Order the data by subjects, so it is ready for analysis on subjects
-# orderedTidyData <- tidyData[order(tidyData$subject),]
+orderedTidyData <- tidyData[order(tidyData$subject),]
+
+# Output the ordered tidyData
+orderedTidyData
  
 #write.table() using row.name=FALSE
-#write.table(orderedTidyData, "GetCleanDataFile", row.names=FALSE, col.names=TRUE, sep="\t",quote=FALSE)
+write.table(orderedTidyData, "GetCleanDataFile", row.names=FALSE, col.names=TRUE, sep="\t",quote=FALSE)
 
 
