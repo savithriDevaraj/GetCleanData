@@ -22,6 +22,7 @@ dFeatures <- data.table(read.table("UCI HAR Dataset/features.txt", stringsAsFact
 
 # Clean variable/feature names to be legal R variables
 dFeatures[, V2:=(gsub("(-|\\(|\\))|,","",V2))]
+dFeatures[, V2:=(gsub("BodyBody", "Body", V2))]
 
 #Read the acivity_labels file that contains the activity ID and the activity Name mapping
 dActivities <- data.table(read.table("UCI HAR Dataset/activity_labels.txt", stringsAsFactors=FALSE))
