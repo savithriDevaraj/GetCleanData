@@ -10,25 +10,29 @@ All the datasets are ready into the home directory R/GetCleanData.
 Files with "subject_* in their file names contains the subject ID. 
 Files with "x_" in their file names contains the values for the features/variables of dataset
 Files with "y_" in their file names contains the activities for which the values were measured
+Read in the Features of the data set in "dFeatures" 
+Read the activity labels file that contains the activity ID and the activity name mapping in "dActivities" 
 
 ##Data Transformation
 The following steps are used to generate the combined (Train and Test) dataset with valid R variable names
 
-* Read in the Features of the data set in "dFeatures" 
-* Clean variable names to be legal R variables,i.e, remove the "-" and "()" from the variable names in "dFeatures" 
-* Read the activity labels file that contains the activity ID and the activity name mapping in "dActivities" 
-* Combine the train and test datasets to build the complete dataset in "dataX", "dataY", "dataSubj"
-* Add activity label to the activities dataset, dActivities. 
-* Combine the Subject/activity datasets in "dataSubActivity"
-* Label the measured variables from the cleaned "dFeatures"  
-* Choose only the required columns to build the clean dataset in "matches"
-* Extract "matches" columns from dataX into "limited" dataset
-* Combine "dataSubActivity" (3 columns) and "limited" (79 columns) to "dData"
-* Remove "activity ID" from "dData" to generate "cleanData"
-* Return "cleanData"
 
-## "cleanData" Description
-"cleanData contains human activity recognition data measured for 30 subjects. It contains 10299 rows of data and 81 columns. The first column, subject, is the experimental subject, the 2nd column shows the activity, viz., walking, walking upstairs, sitting, etc. The next 79 columns are the scrubbed data measurements from the accelerometer of the Samsung Galaxy S smart phone. 
+* Cleaned variable names to be legal R variables,i.e, remove the "-" and "()" from the variable names in "dFeatures". Replaced "BodyBody" by "Body" in some frequency domain variables.
+* Combined the train and test datasets to build the complete dataset in "dataX", "dataY", "dataSubj"
+* Added activity label to the activities dataset, dActivities. 
+* Combined the Subject/activity datasets in "dataSubActivity"
+* Labelled the measured variables from the cleaned "dFeatures"  
+* Chose only the required columns to build the clean dataset in "matches"
+* Extracted "matches" columns from dataX into "limited" dataset
+* Combined "dataSubActivity" (3 columns) and "limited" (79 columns) to "dData"
+* Removed "activity ID" from "dData" to generate "cleanData"
+* This cleaned data has 1 variable/measure in each column, and each row is an independent observation for subject/activity. There are multiple observations for subject/activity in this dataset.
+* Summarized (group) subject/activity observations and calculated mean of these observations to generate 1 averaged observation for each subject/activity combination in tidyData. This reduces 10299 observations to 180 (30 times 6).
+* Ordered the tidyData dataset by subject.
+* Returned this "OrderedTidyData"
+
+## "orderedTidyData" Description
+This data contains human activity recognition data measured for 30 subjects. It contains 180 rows of data and 81 columns. The first column, subject, is the experimental subject, the 2nd column shows the activity, viz., walking, walking upstairs, sitting, etc. The next 79 columns are the averaged data measurements from the accelerometer of the Samsung Galaxy S smart phone. 
 
 
 ###Variables
@@ -36,11 +40,11 @@ The following steps are used to generate the combined (Train and Test) dataset w
 subject		-		Experimental subject, ranging from 1 to 30
 activity	-		Activities, values (WALKING, WALKING_UPSTAIRS, WALKING_DOWNSTAIRS, STANDING, SITTING, LAYING)
 
-In the following 79 variables, '-XYZ' is used to denote 3-axial signals in the X, Y and Z directions. 't' denotes time domain signals, captured at 50 Hz. 'f' denote frequency domain signals. "mean" indicates mean values, and "std".  indicates standard deviation from the mean.
+In the following 79 variables, '-XYZ' is used to denote 3-axial signals in the X, Y and Z directions. 
+"mean" indicates mean values, and "std" indicates standard deviation from the mean.
+The body linear acceleration and angular velocity were derived in time to obtain Jerk signals (tBodyAccJerk-XYZ and tBodyGyroJerk-XYZ). 
 
-The body linear acceleration and angular velocity were derived in time to obtain Jerk signals (tBodyAccJerk-XYZ and tBodyGyroJerk-XYZ). Also the magnitude of these three-dimensional signals were calculated using the Euclidean norm (tBodyAccMag, tGravityAccMag, tBodyAccJerkMag, tBodyGyroMag, tBodyGyroJerkMag). 
-
-A Fast Fourier Transform (FFT) was applied to some of these signals producing fBodyAcc-XYZ, fBodyAccJerk-XYZ, fBodyGyro-XYZ, fBodyAccJerkMag, fBodyGyroMag, fBodyGyroJerkMag.
+The following 't' variables denotes time domain signals, captured at 50 Hz. 
 
 tBodyAccmeanX,		tBodyAccmeanY,		tBodyAccmeanZ,	
 tBodyAccstdX,		tBodyAccstdY,		tBodyAccstdZ,
@@ -56,7 +60,9 @@ tBodyAccMagmean,	tBodyAccMagstd,
 tGravityAccMagmean,	tGravityAccMagstd,	
 tBodyAccJerkMagmean,tBodyAccJerkMagstd,	
 tBodyGyroMagmean	tBodyGyroMagstd,	
-tBodyGyroJerkMagmean,	tBodyGyroJerkMagstd,	
+tBodyGyroJerkMagmean,	tBodyGyroJerkMagstd.
+
+The following 'f' variables denote frequency domain signals -
 fBodyAccmeanX,		fBodyAccmeanY,		fBodyAccmeanZ,	
 fBodyAccstdX,		fBodyAccstdY,		fBodyAccstdZ,	
 fBodyAccmeanFreqX,	fBodyAccmeanFreqY,	fBodyAccmeanFreqZ,	
@@ -67,8 +73,8 @@ fBodyGyromeanX, 		fBodyGyromeanY,		fBodyGyromeanZ,
 fBodyGyrostdX,		fBodyGyrostdY,		fBodyGyrostdZ,	
 fBodyGyromeanFreqX,	fBodyGyromeanFreqY,	fBodyGyromeanFreqZ,	
 fBodyAccMagmean,		fBodyAccMagstd,		fBodyAccMagmeanFreq,	
-fBodyBodyAccJerkMagmean,	fBodyBodyAccJerkMagstd,	fBodyBodyAccJerkMagmeanFreq,	
-fBodyBodyGyroMagmean,	fBodyBodyGyroMagstd,	fBodyBodyGyroMagmeanFreq,	
-fBodyBodyGyroJerkMagmean, fBodyBodyGyroJerkMagstd,	fBodyBodyGyroJerkMagmeanFreq
+fBodyAccJerkMagmean,	fBodyAccJerkMagstd,	fBodyAccJerkMagmeanFreq,	
+fBodyGyroMagmean,	fBodyGyroMagstd,	fBodyGyroMagmeanFreq,	
+fBodyGyroJerkMagmean, fBodyGyroJerkMagstd,	fBodyGyroJerkMagmeanFreq
 
 
