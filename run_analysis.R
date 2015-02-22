@@ -1,6 +1,6 @@
 install.packages("data.table")
 library(data.table)
-setwd("C:/Users/Anna/Documents/R/GetCleanData")
+setwd("C:/Users/Anna/GetCleanData")
  
 #Step 1 - Read the training and test datasets. Read the variables/features in the dataset
 
@@ -86,7 +86,9 @@ orderedTidyData <- tidyData[order(tidyData$subject),]
 # Output the ordered tidyData
 orderedTidyData
  
-#write.table() using row.name=FALSE
+#write.table() using row.name=FALSE. Read it back and verify data looks good.
 write.table(orderedTidyData, "GetCleanDataFile", row.names=FALSE, col.names=TRUE, sep="\t",quote=FALSE)
+
+#data <- read.table("GetCleanDataFile", header = TRUE)
 
 

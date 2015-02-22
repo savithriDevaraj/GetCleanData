@@ -23,13 +23,14 @@ For each record in the dataset it is provided:
 Run the run_analysis.R script to merge and clean the extracted data in the home folder. The script does the following -
 
 * Step 1 - Read training and test Subjects (subject_) and activities (y_) datasets. Read the measured variables(x_) dataset. Read the activity_labels and measured variable names (features). 
-* Step 2 - Renames measured variable names to remove "-", "()",etc to make them valid R variables. Replaces "BodyBody" with "Body" in some of the frequency domain variables.
+* Step 2 - Renames measured variable names to remove "-", "()",etc to make them valid R variables using camel cases. Replaces "BodyBody" with "Body" in some of the frequency domain variables.
 * Step 3 - Combines the Subject/activity datasets. 
 * Step 4 - Labels the measured variables and the activities.
 * Step 5 - Chooses the required "mean" and "std" variables (from x_) for clean dataset. Merges this with the Subject/activity data from Step 3 above
-* Step 6 - Using this cleaned data from above, summarizes (groups by) subject/activity, and calculates the mean values for the variables for this grouping. This summarization rolls up n observations into 1 for a subject/activity combination. This reduces 10299 observations to 180 observations.
+* Step 6 - Using this cleaned data from above, summarizes (groups by) subject/activity, and calculates the mean values for the variables for this grouping. This summarization rolls up n observations into 1 for a subject/activity combination. This reduces 10299 total observations to 180 observations.
 * Step 7 - Orders this dataset by subject
 * Step 8 - Returns this summarized, ordered dataset as the tidied dataset.
+* Step 9 - Writes this tidied dataset to a file "GetCleanDataFile" in the home folder
 
 
 <!-- -->
