@@ -1,11 +1,11 @@
-#Human Activity Recognition Using Smart phones.
-#Code Book. 
-#Created by Savithri Devaraj, 
-#Date 02/16/2015
+##Human Activity Recognition Using Smart phones.
+##Code Book. 
+##Created by Savithri Devaraj, 
+##Date 02/16/2015
 
 This document describes the transformations to the UCI HAR dataset to get it ready for statistical analysis.
 
-##Reading and pre-processing
+###Reading and pre-processing
 All the datasets are ready into the home directory R/GetCleanData.
 Files with "subject_* in their file names contains the subject ID. 
 Files with "x_" in their file names contains the values for the features/variables of dataset
@@ -13,7 +13,7 @@ Files with "y_" in their file names contains the activities for which the values
 Read in the Features of the data set in "dFeatures" 
 Read the activity labels file that contains the activity ID and the activity name mapping in "dActivities" 
 
-##Data Transformation
+###Data Transformation
 The following steps are used to generate the combined (Train and Test) dataset with valid R variable names
 
 
@@ -31,7 +31,7 @@ The following steps are used to generate the combined (Train and Test) dataset w
 * Ordered the tidyData dataset by subject.
 * Returned this "OrderedTidyData"
 
-## "orderedTidyData" Description
+### "orderedTidyData" Description
 This data contains human activity recognition data measured for 30 subjects. It contains 180 rows of data and 81 columns. The first column, subject, is the experimental subject, the 2nd column shows the activity, viz., walking, walking upstairs, sitting, etc. The next 79 columns are the averaged data measurements from the accelerometer of the Samsung Galaxy S smart phone. 
 
 
@@ -42,7 +42,9 @@ activity	-		Activities, values (WALKING, WALKING_UPSTAIRS, WALKING_DOWNSTAIRS, S
 
 In the following 79 variables, '-XYZ' is used to denote 3-axial signals in the X, Y and Z directions. 
 "mean" indicates mean values, and "std" indicates standard deviation from the mean.
-The body linear acceleration and angular velocity were derived in time to obtain Jerk signals (tBodyAccJerk-XYZ and tBodyGyroJerk-XYZ). 
+The body linear acceleration and angular velocity were derived in time to obtain Jerk signals (tBodyAccJerk-XYZ and tBodyGyroJerk-XYZ).
+ 
+All variables have been normalized to the respective time and frequency ranges, hence are unit-less.
 
 The following 't' variables denotes time domain signals, captured at 50 Hz. 
 

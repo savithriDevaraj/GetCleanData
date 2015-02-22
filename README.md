@@ -19,7 +19,7 @@ For each record in the dataset it is provided:
 - Its activity label. 
 - An identifier of the subject who carried out the experiment.
 
-### Procedure to clean data.
+### Running the script to clean data.
 Run the run_analysis.R script to merge and clean the extracted data in the home folder. The script does the following -
 
 * Step 1 - Read training and test Subjects (subject_) and activities (y_) datasets. Read the measured variables(x_) dataset. Read the activity_labels and measured variable names (features). 
